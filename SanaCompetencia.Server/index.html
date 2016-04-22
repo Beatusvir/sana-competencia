@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sana Competencia</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <link rel="stylesheet" href="Content/bootstrap.min.css" />
+  <link rel="stylesheet" href="Content/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="Content/style.css" />
+  <link rel="stylesheet" href="Content/normalize.css" />
+
+  <script src="Scripts/jquery-2.2.3.min.js"></script>
+  <script src="Scripts/jquery.signalR-2.2.0.js"></script>
+  <script src="Scripts/bootstrap.min.js"></script>
+  <script src="Scripts/angular.min.js"></script>
+  <script src="Scripts/angular-animate.min.js"></script>
+
+  <script src="app/app.js"></script>
+  <script src="app/services.js"></script>
+  <script src="app/directives.js"></script>
+  <script src="app/controller.js"></script>
+  <!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+
+<body ng-app="sana-competencia">
+  <div id="main" class="container-fluid">
+    <div class="row" ng-controller="DataController">
+      <div class="col-xs-12">
+        <h1 ng-show="monthly">ACUMULADO MENSUAL</h1>
+        <h1 ng-hide="monthly">ACUMULADO DIARIO</h1>
+      </div>
+      <div class="col-xs-12 col-md-12 col-md-12">
+        <table class="table features-table">
+          <!--
+          <thead>
+            <tr>
+              <td></td>
+              <td>{{ mafarta.nombre }}</td>
+              <td>{{ merida.nombre }}</td>
+              <td>{{ occidente.nombre }}</td>
+              <td>{{ centro.nombre }}</td>
+              <td>{{ barquisimeto.nombre }}</td>
+              <td>{{ oriente.nombre }}</td>
+            </tr>
+          </thead> -->
+          <tbody>
+            <tr>
+              <td>Recepción<br><img src="images/truck.png" class="img-responsive" width="90" height="80" alt="check"></td>
+              <div ng-if="recepcionLength > 0">
+                <td ng-repeat="i in recepcionArray" class="slide"></td>
+              </div>
+              <td ng-repeat="r in recepcion | orderBy: 'valor'" class="slide">
+                <h6>{{ r.nombre }}</h6>
+                <p>{{ r.valor }}</p>
+              </td>
+              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+            </tr>
+            <tr>
+              <td>Almacén<br><img src="images/machine.png" class="img-responsive" width="90" height="80" alt="check"></td>
+              <div ng-if="almacenLength > 0">
+                <td ng-repeat="i in almacenArray"></td>
+              </div>
+              <td ng-repeat="a in almacen | orderBy: 'valor'">
+                <h6>{{ a.nombre }}</h6>
+                <p>{{ a.valor }}</p>
+              </td>
+              <td><img src="images/goal.png" width="45" class="img-responsive" height="65" alt="check"></td>
+            </tr>
+            <tr>
+              <td>Cesta<br><img src="images/cesta.png" class="img-responsive" width="65" height="44" alt="check"></td>
+              <div ng-if="cestaLength > 0">
+                <td ng-repeat="i in cestaArray"></td>
+              </div>
+              <td ng-repeat="c in cesta | orderBy: 'valor'">
+                <h6>{{ c.nombre }}</h6>
+                <p>{{ c.valor }}</p>
+              </td>
+              <td><img src="images/goal.png" width="45" class="img-responsive" height="65" alt="check"></td>
+            </tr>
+            <tr>
+              <td>Bulto<br><img src="images/bulto.png" class="img-responsive" width="65" height="44" alt="check"></td>
+              <div ng-if="bultoLength > 0">
+                <td ng-repeat="i in bultoArray"></td>
+              </div>
+              <td ng-repeat="b in bulto | orderBy: 'valor'">
+                <h6>{{ b.nombre }}</h6>
+                <p>{{ b.valor }}</p>
+              </td>
+              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+            </tr>
+            <tr>
+              <td>Trafico<br><img src="images/trafico.png" class="img-responsive" width="70" height="55" alt="check"></td>
+              <div ng-if="traficoLength > 0">
+                <td ng-repeat="i in traficoArray"></td>
+              </div>
+              <td ng-repeat="t in trafico | orderBy: 'valor'">
+                <h6>{{ t.nombre }}</h6>
+                <p>{{ t.valor }}</p>
+              </td>
+              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+            </tr>
+            <tr>
+              <td>Devoluciones<br><img src="images/carreta.png" class="img-responsive" width="89" height="80" alt="check"></td>
+              <div ng-if="devolucionLength > 0">
+                <td ng-repeat="i in devolucionArray"></td>
+              </div>
+              <td ng-repeat="d in devolucion | orderBy: '-valor'">
+                <h6>{{ d.nombre }}</h6>
+                <p>{{ d.valor }}</p>
+              </td>
+              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

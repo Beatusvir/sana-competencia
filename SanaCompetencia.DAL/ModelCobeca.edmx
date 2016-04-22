@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DEV_COBECAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_COBECA.dbo.data_indicador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="data_indicador">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="protocolo" />
+            <PropertyRef Name="cod_drogueria" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="hora" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="protocolo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="cod_drogueria" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drogueria">
+          <Key>
+            <PropertyRef Name="cod_drogueria" />
+          </Key>
+          <Property Name="cod_drogueria" Type="int" Nullable="false" />
+          <Property Name="desc_drogueria" Type="varchar" MaxLength="40" />
+          <Property Name="siglas" Type="char" MaxLength="15" />
+          <Property Name="rif" Type="varchar" MaxLength="15" />
+          <Property Name="nit" Type="varchar" MaxLength="15" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" />
+          <Property Name="direccion" Type="char" MaxLength="50" />
+          <Property Name="cod_pais" Type="char" MaxLength="6" />
+          <Property Name="cod_estado" Type="char" MaxLength="6" />
+          <Property Name="cod_municipio" Type="char" MaxLength="6" />
+          <Property Name="cod_parroquia" Type="char" MaxLength="6" />
+          <Property Name="activo" Type="tinyint" />
+          <Property Name="ip_config" Type="varchar" MaxLength="15" />
+          <Property Name="puerto" Type="int" />
+          <Property Name="rowguid" Type="uniqueidentifier" />
+          <Property Name="nombre_abrev" Type="varchar" MaxLength="15" />
+          <Property Name="drog_externa" Type="tinyint" />
+          <Property Name="automatizada" Type="tinyint" />
+          <Property Name="ip_pccorreo_1" Type="varchar" MaxLength="15" />
+          <Property Name="ip_pccorreo_2" Type="varchar" MaxLength="15" />
+          <Property Name="activo_web" Type="tinyint" Nullable="false" />
+          <Property Name="guardado_web" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_data_indicador_Drogueria">
+          <End Role="Drogueria" Type="Self.Drogueria" Multiplicity="1" />
+          <End Role="data_indicador" Type="Self.data_indicador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drogueria">
+              <PropertyRef Name="cod_drogueria" />
+            </Principal>
+            <Dependent Role="data_indicador">
+              <PropertyRef Name="cod_drogueria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DEV_COBECAModelStoreContainer">
+          <EntitySet Name="Drogueria" EntityType="Self.Drogueria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="data_indicador" EntityType="Self.data_indicador" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [data_indicador].[id] AS [id], 
+    [data_indicador].[protocolo] AS [protocolo], 
+    [data_indicador].[cod_drogueria] AS [cod_drogueria], 
+    [data_indicador].[fecha] AS [fecha], 
+    [data_indicador].[hora] AS [hora], 
+    [data_indicador].[valor] AS [valor]
+    FROM [dbo].[data_indicador] AS [data_indicador]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_data_indicador_Drogueria" Association="Self.FK_data_indicador_Drogueria">
+            <End Role="Drogueria" EntitySet="Drogueria" />
+            <End Role="data_indicador" EntitySet="data_indicador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DEV_COBECAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="data_indicador">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="protocolo" />
+            <PropertyRef Name="cod_drogueria" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="hora" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="protocolo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cod_drogueria" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Drogueria" Relationship="DEV_COBECAModel.FK_data_indicador_Drogueria" FromRole="data_indicador" ToRole="Drogueria" />
+        </EntityType>
+        <EntityContainer Name="COBECAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="data_indicador" EntityType="Self.data_indicador" />
+          <EntitySet Name="Drogueria" EntityType="DEV_COBECAModel.Drogueria" />
+          <AssociationSet Name="FK_data_indicador_Drogueria" Association="DEV_COBECAModel.FK_data_indicador_Drogueria">
+            <End Role="Drogueria" EntitySet="Drogueria" />
+            <End Role="data_indicador" EntitySet="data_indicador" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Drogueria">
+          <Key>
+            <PropertyRef Name="cod_drogueria" />
+          </Key>
+          <Property Name="cod_drogueria" Type="Int32" Nullable="false" />
+          <Property Name="desc_drogueria" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="siglas" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="rif" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="nit" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="cod_pais" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="cod_estado" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="cod_municipio" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="cod_parroquia" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="activo" Type="Byte" />
+          <Property Name="ip_config" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="puerto" Type="Int32" />
+          <Property Name="rowguid" Type="Guid" />
+          <Property Name="nombre_abrev" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="drog_externa" Type="Byte" />
+          <Property Name="automatizada" Type="Byte" />
+          <Property Name="ip_pccorreo_1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ip_pccorreo_2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="activo_web" Type="Byte" Nullable="false" />
+          <Property Name="guardado_web" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="data_indicador" Relationship="DEV_COBECAModel.FK_data_indicador_Drogueria" FromRole="Drogueria" ToRole="data_indicador" />
+        </EntityType>
+        <Association Name="FK_data_indicador_Drogueria">
+          <End Type="DEV_COBECAModel.Drogueria" Role="Drogueria" Multiplicity="1" />
+          <End Type="DEV_COBECAModel.data_indicador" Role="data_indicador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drogueria">
+              <PropertyRef Name="cod_drogueria" />
+            </Principal>
+            <Dependent Role="data_indicador">
+              <PropertyRef Name="cod_drogueria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DEV_COBECAModelStoreContainer" CdmEntityContainer="COBECAEntities">
+          <EntitySetMapping Name="data_indicador">
+            <EntityTypeMapping TypeName="DEV_COBECAModel.data_indicador">
+              <MappingFragment StoreEntitySet="data_indicador">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="protocolo" ColumnName="protocolo" />
+                <ScalarProperty Name="cod_drogueria" ColumnName="cod_drogueria" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drogueria">
+            <EntityTypeMapping TypeName="DEV_COBECAModel.Drogueria">
+              <MappingFragment StoreEntitySet="Drogueria">
+                <ScalarProperty Name="guardado_web" ColumnName="guardado_web" />
+                <ScalarProperty Name="activo_web" ColumnName="activo_web" />
+                <ScalarProperty Name="ip_pccorreo_2" ColumnName="ip_pccorreo_2" />
+                <ScalarProperty Name="ip_pccorreo_1" ColumnName="ip_pccorreo_1" />
+                <ScalarProperty Name="automatizada" ColumnName="automatizada" />
+                <ScalarProperty Name="drog_externa" ColumnName="drog_externa" />
+                <ScalarProperty Name="nombre_abrev" ColumnName="nombre_abrev" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="puerto" ColumnName="puerto" />
+                <ScalarProperty Name="ip_config" ColumnName="ip_config" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="cod_parroquia" ColumnName="cod_parroquia" />
+                <ScalarProperty Name="cod_municipio" ColumnName="cod_municipio" />
+                <ScalarProperty Name="cod_estado" ColumnName="cod_estado" />
+                <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="rif" ColumnName="rif" />
+                <ScalarProperty Name="siglas" ColumnName="siglas" />
+                <ScalarProperty Name="desc_drogueria" ColumnName="desc_drogueria" />
+                <ScalarProperty Name="cod_drogueria" ColumnName="cod_drogueria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
