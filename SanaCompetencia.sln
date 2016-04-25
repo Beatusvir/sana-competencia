@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanaCompetencia.DAL", "SanaCompetencia.DAL\SanaCompetencia.DAL.csproj", "{9E198166-4EED-4541-AF70-7B1E8BACAE38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanaCompetencia.Server", "SanaCompetencia.Server\SanaCompetencia.Server.csproj", "{9E93D8F0-F4E5-4083-A25E-7D3EF0C10F69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanaCompetencia.Web", "SanaCompetencia.Server\SanaCompetencia.Web.csproj", "{9E93D8F0-F4E5-4083-A25E-7D3EF0C10F69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

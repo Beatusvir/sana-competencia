@@ -173,4 +173,12 @@ body
   margin: 0 auto;
 }
 
+.progress-bar {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
 
+#timeout {
+  font-family: Arial;
+  font-size: 10px;
+}

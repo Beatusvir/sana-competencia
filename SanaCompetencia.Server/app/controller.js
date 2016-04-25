@@ -1,21 +1,54 @@
 ﻿'use strict'
 
 app.controller('DataController', ['$rootScope', '$scope', 'backendHubProxy', function ($rootScope, $scope, backendHubProxy) {
-  $rootScope.monthly = false
+  $rootScope.pollInterval = 5000 // Tiempo para refrescar la información
+  $scope.cycleInterval = 120000 // Tiempo para cambiar diario o mensual
+  $rootScope.monthly = false // Para identificar si la información sera diaria o mensual
   var dataHub = backendHubProxy(backendHubProxy.defaultServer, 'dataHub')
 
-  setInterval(function () {
+  $scope.title = "ACUMULADO DIARIO"
+  var bar = $('#time-left')
+  $rootScope.setTitle = function (title) {
+    $scope.title = title
+  }
+
+  $scope.progressBarRestart = function () {
+    clearInterval($scope.progressBarInterval)
+    bar.attr('aria-valuenow', ($scope.cycleInterval / 1000))
+    bar.animate({ width: '100%' })
+    $scope.progressBarStart()
+  }
+
+  $scope.progressBarStart = function () {
+    $scope.progressBarInterval = setInterval(function () {
+      var bar_value = bar.attr('aria-valuenow')
+      var width = (bar_value * 100) / ($scope.cycleInterval / 1000)
+      var new_value = (bar_value - 1)
+      var width_value = width + '%'
+      bar.attr('aria-valuenow', new_value)
+      bar.animate({ width: width_value }, {
+        duration: 1000,
+        easing: 'linear'
+      })
+    }, 1000)
+  }
+
+  // Cada cuanto tiempo se cambia entre diario y mensual
+  $scope.progressBarStart()
+  var cycleInterval = setInterval(function () {
+    $scope.progressBarRestart()
     $rootScope.monthly = !$rootScope.monthly
     $scope.monthly = $rootScope.monthly
-  }, 120000)
+  }, $scope.cycleInterval)
 
+  // Objeto inicial para cada indicador
   $scope.recepcion = [
-    { drogueria: 3, valor: 0, nombre: 'San Cristóbal' },
-    { drogueria: 4, valor: 0, nombre: 'Mérida' },
-    { drogueria: 7, valor: 0, nombre: 'Occidente' },
-    { drogueria: 13, valor: 0, nombre: 'Centro' },
-    { drogueria: 14, valor: 0, nombre: 'Barquisimeto' },
-    { drogueria: 16, valor: 0, nombre: 'Oriente' }
+    { drogueria: 3, valor: 0, nombre: 'MAFARTA' },
+    { drogueria: 4, valor: 0, nombre: 'DROMERCA' },
+    { drogueria: 7, valor: 0, nombre: 'OCCIDENTE' },
+    { drogueria: 13, valor: 0, nombre: 'COBECA CENTRO' },
+    { drogueria: 14, valor: 0, nombre: 'COBECA BQTO' },
+    { drogueria: 16, valor: 0, nombre: 'ORIENTE' }
   ]
   $scope.almacen = $scope.recepcion
   $scope.cesta = $scope.recepcion
@@ -23,9 +56,10 @@ app.controller('DataController', ['$rootScope', '$scope', 'backendHubProxy', fun
   $scope.trafico = $scope.recepcion
   $scope.devolucion = $scope.recepcion
 
+  // Callback de SignalR por cada indicador, si hay información se borra el arreglo actual y se actualiza
   dataHub.on('broadcastRecepcion', function (data) {
-    $scope.recepcion = [];
-    if (data.length < 6) {
+    if (data.length > 0 && data.length <= 6) {
+      $scope.recepcion = [];
       $scope.recepcionLength = 6 - data.length
       $scope.recepcionArray = []
       for (var i = 0; i < $scope.recepcionLength; i++) {
@@ -38,8 +72,8 @@ app.controller('DataController', ['$rootScope', '$scope', 'backendHubProxy', fun
   })
 
   dataHub.on('broadcastAlmacen', function (data) {
-    $scope.almacen = [];
-    if (data.length < 6) {
+    if (data.length > 0 && data.length <= 6) {
+      $scope.almacen = []
       $scope.almacenLength = 6 - data.length
       $scope.almacenArray = []
       for (var i = 0; i < $scope.almacenLength; i++) {
@@ -52,8 +86,8 @@ app.controller('DataController', ['$rootScope', '$scope', 'backendHubProxy', fun
   })
 
   dataHub.on('broadcastCestas', function (data) {
-    $scope.cesta = [];
-    if (data.length < 6) {
+    if (data.length > 0 && data.length <= 6) {
+      $scope.cesta = []
       $scope.cestaLength = 6 - data.length
       $scope.cestaArray = []
       for (var i = 0; i < $scope.cestaLength; i++) {
@@ -66,8 +100,8 @@ app.controller('DataController', ['$rootScope', '$scope', 'backendHubProxy', fun
   })
 
   dataHub.on('broadcastBulto', function (data) {
-    $scope.bulto = [];
-    if (data.length < 6) {
+    if (data.length > 0 && data.length <= 6) {
+      $scope.bulto = []
       $scope.bultoLength = 6 - data.length
       $scope.bultoArray = []
       for (var i = 0; i < $scope.bultoLength; i++) {
@@ -80,8 +114,8 @@ app.controller('DataController', ['$rootScope', '$scope', 'backendHubProxy', fun
   })
 
   dataHub.on('broadcastDevolucion', function (data) {
-    $scope.devolucion = [];
-    if (data.length < 6) {
+    if (data.length > 0 && data.length <= 6) {
+      $scope.devolucion = [];
       $scope.devolucionLength = 6 - data.length
       $scope.devolucionArray = []
       for (var i = 0; i < $scope.devolucionLength; i++) {
@@ -94,8 +128,8 @@ app.controller('DataController', ['$rootScope', '$scope', 'backendHubProxy', fun
   })
 
   dataHub.on('broadcastTrafico', function (data) {
-    $scope.trafico = [];
-    if (data.length < 6) {
+    if (data.length > 0 && data.length <= 6) {
+      $scope.trafico = [];
       $scope.traficoLength = 6 - data.length
       $scope.traficoArray = []
       for (var i = 0; i < $scope.traficoLength; i++) {
