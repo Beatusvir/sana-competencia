@@ -49,77 +49,75 @@
           </thead> -->
           <tbody>
             <tr>
-              <td>Recepción<br><img src="images/truck.png" class="img-responsive" width="90" height="80" alt="check"></td>
-              <div ng-if="recepcionLength > 0">
+              <td>Recepción<br><img src="images/truck.png" alt="check"></td>
+              <div ng-if="recepcionArray.length > 0">
                 <td ng-repeat="i in recepcionArray" class="slide"></td>
               </div>
               <td ng-repeat="r in recepcion | orderBy: 'valor'" class="slide">
                 <h6>{{ r.nombre }}</h6>
                 <p>{{ r.valor }}</p>
               </td>
-              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+              <td><img src="images/goal.png" alt="check"></td>
             </tr>
             <tr>
-              <td>Almacén<br><img src="images/machine.png" class="img-responsive" width="90" height="80" alt="check"></td>
-              <div ng-if="almacenLength > 0">
+              <td>Almacén<br><img src="images/machine.png" alt="check"></td>
+              <div ng-if="almacenArray.length > 0">
                 <td ng-repeat="i in almacenArray"></td>
               </div>
               <td ng-repeat="a in almacen | orderBy: 'valor'">
                 <h6>{{ a.nombre }}</h6>
                 <p>{{ a.valor }}</p>
               </td>
-              <td><img src="images/goal.png" width="45" class="img-responsive" height="65" alt="check"></td>
+              <td><img src="images/goal.png" alt="check"></td>
             </tr>
             <tr>
-              <td>Cesta<br><img src="images/cesta.png" class="img-responsive" width="65" height="44" alt="check"></td>
-              <div ng-if="cestaLength > 0">
+              <td>Cesta<br><img src="images/cesta.png" alt="check"></td>
+              <div ng-if="cestaArray.length > 0">
                 <td ng-repeat="i in cestaArray"></td>
               </div>
               <td ng-repeat="c in cesta | orderBy: 'valor'">
                 <h6>{{ c.nombre }}</h6>
                 <p>{{ c.valor }}</p>
               </td>
-              <td><img src="images/goal.png" width="45" class="img-responsive" height="65" alt="check"></td>
+              <td><img src="images/goal.png" alt="check"></td>
             </tr>
             <tr>
-              <td>Bulto<br><img src="images/bulto.png" class="img-responsive" width="65" height="44" alt="check"></td>
-              <div ng-if="bultoLength > 0">
+              <td>Bulto<br><img src="images/bulto.png" alt="check"></td>
+              <div ng-if="bultoArray.length > 0">
                 <td ng-repeat="i in bultoArray"></td>
               </div>
               <td ng-repeat="b in bulto | orderBy: 'valor'">
                 <h6>{{ b.nombre }}</h6>
                 <p>{{ b.valor }}</p>
               </td>
-              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+              <td><img src="images/goal.png" alt="check"></td>
             </tr>
             <tr>
-              <td>Trafico<br><img src="images/trafico.png" class="img-responsive" width="70" height="55" alt="check"></td>
-              <div ng-if="traficoLength > 0">
+              <td>Trafico<br><img src="images/trafico.png" alt="check"></td>
+              <div ng-if="traficoArray.length > 0">
                 <td ng-repeat="i in traficoArray"></td>
               </div>
               <td ng-repeat="t in trafico | orderBy: 'valor'">
                 <h6>{{ t.nombre }}</h6>
                 <p>{{ t.valor }}</p>
               </td>
-              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+              <td><img src="images/goal.png" alt="check"></td>
             </tr>
             <tr>
-              <td>Devoluciones<br><img src="images/carreta.png" class="img-responsive" width="89" height="80" alt="check"></td>
-              <div ng-if="devolucionLength > 0">
+              <td>Devoluciones<br><img src="images/carreta.png" alt="check"></td>
+              <div ng-if="devolucionArray.length > 0">
                 <td ng-repeat="i in devolucionArray"></td>
               </div>
               <td ng-repeat="d in devolucion | orderBy: '-valor'">
                 <h6>{{ d.nombre }}</h6>
                 <p>{{ d.valor }}</p>
               </td>
-              <td><img src="images/goal.png" class="img-responsive" width="45" height="65" alt="check"></td>
+              <td><img src="images/goal.png" alt="check"></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="col-xs-12">
-        <!--<br />
-        <h6 id="timeout"></h6>-->
         <div class="progress" style="height: 2px;" title="Tiempo para cambiar de vista">
           <div id="time-left" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="120" aria-valuemin="0"
             aria-valuemax="120" style="width:100%;">

@@ -25,4 +25,16 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://srvtfs201:8080/tfs/comercioelectronico
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SanaCompetencia.DAL\\SanaCompetencia.DAL.csproj
+		SccProjectName1 = SanaCompetencia.DAL
+		SccLocalPath1 = SanaCompetencia.DAL
+		SccProjectUniqueName2 = SanaCompetencia.Server\\SanaCompetencia.Web.csproj
+		SccProjectName2 = SanaCompetencia.Server
+		SccLocalPath2 = SanaCompetencia.Server
+	EndGlobalSection
 EndGlobal
